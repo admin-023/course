@@ -6,11 +6,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 
 @SpringBootApplication
 @EnableEurekaClient
-@MapperScan("com.course.system.mapper")
+@ComponentScan("com.course") /*用来扫描@Controller  @Service  @Repository这类,主要就是定义扫描的路径从中找出标志了需要装配的类到Spring容器中*/
+@MapperScan("com.course.server.mapper")/*扫描mapper类的注解,就不用在每个mapper类上加@MapperScan了*/
 public class SystemApplication {
 
 	private static final Logger LOG= LoggerFactory.getLogger(SystemApplication.class);
