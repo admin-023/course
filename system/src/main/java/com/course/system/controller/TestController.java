@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController /*@RestController返回json数据 @Controller返回页面*/
 public class TestController {
-   @Resource
+    @Resource
     private TestService testService;
     @RequestMapping("/test")
     public List<Test> test(){
