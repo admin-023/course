@@ -22,7 +22,7 @@ public class ChapterService {
         for (int i = 0; i <chapterList.size() ; i++) {
             Chapter chapter = chapterList.get(i);
             ChapterDto chapterDto = new ChapterDto();
-            BeanUtils.copyProperties(chapter,chapterDto);
+            BeanUtils.copyProperties(chapter,chapterDto);//将前者的数据复制到后者
             chapterDtoList.add(chapterDto);
         }
         return chapterDtoList;
