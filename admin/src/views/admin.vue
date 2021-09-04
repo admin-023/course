@@ -483,9 +483,11 @@
     export default {
         name: "admin",
         mounted:function(){
+            let _this=this;
             $("body").removeClass("login-layout light-login");
             $("body").attr("class", "no-skin");
             // console.log("admin");
+            _this.activeSidebar(_this.$route.name.replace("/","-")+"-sidebar");
         },
         methods:{
             login(){
@@ -501,6 +503,18 @@
                 if (parentLi){
                     parentLi.siblings().removeClass("open active");
                     parentLi.addClass("open active");
+                }
+            }
+        },
+        watch:{
+            $route:{
+                handler:function(val,oldval){
+                    console.log("----->页面跳转：",val,oldval);
+                    let _this=this;
+                    _this.$nextTick(function(){
+                        //页面加载完成后执行
+                        _this.activeSidebar(_this.$route.name.replace("/","-")+"-sidebar");
+                    })
                 }
             }
         }
