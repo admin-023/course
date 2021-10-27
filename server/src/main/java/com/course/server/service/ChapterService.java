@@ -23,7 +23,7 @@ public class ChapterService {
         ChapterExample chapterExample = new ChapterExample();
         List<Chapter> chapterList = chapterMapper.selectByExample(chapterExample);
         PageInfo<Chapter> pageInfo=new PageInfo<>(chapterList);
-        pageDto.getTotal(pageInfo.getTotal());
+        pageDto.setTotal(pageInfo.getTotal());
         List<ChapterDto> chapterDtoList = new ArrayList<>();
         for (int i = 0; i <chapterList.size(); i++) {
             Chapter chapter = chapterList.get(i);
