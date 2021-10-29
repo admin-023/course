@@ -15,7 +15,7 @@ public class ChapterDto {
         this.id = id;
     }
 
-    public String getCourseId() {
+    public String getCourseId(String shortUuid) {
         return courseId;
     }
 
