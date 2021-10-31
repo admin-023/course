@@ -9,6 +9,7 @@ import com.course.server.util.CopyUtil;
 import com.course.server.util.UuidUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.github.pagehelper.util.StringUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -36,11 +37,28 @@ public class ChapterService {
         List<ChapterDto> chapterDtoList = CopyUtil.copyList(chapterList, ChapterDto.class);
         pageDto.setList(chapterDtoList);
     }
+    /*
+    * 保存，id有值时更新，无值时新增
+    */
     public void save(ChapterDto chapterDto) {
-        chapterDto.setId(UuidUtil.getShortUuid());
-//        Chapter chapter = new Chapter();
-//        BeanUtils.copyProperties(chapterDto,chapter);
-         Chapter chapter = CopyUtil.copy(chapterDto, Chapter.class);
-         chapterMapper.insert(chapter);
+        Chapter chapter = CopyUtil.copy(chapterDto, Chapter.class);
+        if (StringUtil.isEmpty(chapterDto.getId())){
+            this.insert(chapter);
+        }else{
+            this.update(chapter);
+        }
+    }
+    /*
+    新增
+    **/
+    public void insert(Chapter chapter) {
+        chapter.setId(UuidUtil.getShortUuid());
+        chapterMapper.insert(chapter);
+    }
+    /*
+    更新
+    * */
+    public void update(Chapter chapter) {
+        chapterMapper.updateByPrimaryKey(chapter);
     }
 }
