@@ -30,7 +30,7 @@ public class ChapterController {
         return responseDto;
     }
 
-    @RequestMapping("/save/")
+    @RequestMapping("/save")
     public ResponseDto save(@RequestBody ChapterDto chapterDto){
         LOG.info("chapterDto:{}",chapterDto);
         ResponseDto responseDto = new ResponseDto();
