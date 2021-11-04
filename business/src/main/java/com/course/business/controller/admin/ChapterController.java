@@ -18,8 +18,6 @@ import java.util.List;
 @RequestMapping("/admin/chapter")
 public class ChapterController {
     private static final Logger LOG= LoggerFactory.getLogger(ChapterController.class);
-    private static final String BUSINESS_NAME="大章";
-
     @Resource
     private ChapterService chapterService;
 
@@ -28,7 +26,9 @@ public class ChapterController {
         LOG.info("pageDto:{}",pageDto);
         ResponseDto responseDto = new ResponseDto();
         chapterService.list(pageDto);
+        LOG.info("pageDto:{}",pageDto);
         responseDto.setContent(pageDto);
+        LOG.info("responseDto:{}",responseDto);
         return responseDto;
     }
 

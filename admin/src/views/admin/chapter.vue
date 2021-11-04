@@ -77,12 +77,12 @@
 <script>
     import Pagination from "../../components/pagination";
     export default {
-        components:{Pagination},
+        components: {Pagination},
         name: "chapter",
         data :function(){
            return {
                chapter: {},
-               chapters : []
+               chapters : [],
            }
         },
         mounted: function () {
