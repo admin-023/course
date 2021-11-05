@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class ServerGenerator {
-//    static String toPath = "generator\\src\\main\\java\\com\\course\\generator\\test\\";//生成路径
     static String toServicePath = "server\\src\\main\\java\\com\\course\\server\\service\\";
+    static String toControllerPath = "business\\src\\main\\java\\com\\course\\business\\controller\\admin\\";
     public static void main(String[] args) throws IOException, TemplateException {
         String Domain="Section";
         String domain="section";
@@ -16,10 +16,16 @@ public class ServerGenerator {
         map.put("Domain",Domain);
         map.put("domain",domain);
 
-//        FreemarkerUtil.initconfig("test.ftl");
-//        FreemarkerUtil.generator(toPath+"Test.java");
-
+        /*
+        * 生成service
+        * */
         FreemarkerUtil.initconfig("service.ftl");
         FreemarkerUtil.generator(toServicePath+Domain+"Service.java",map);
+
+        /*
+         * 生成controller
+         * */
+        FreemarkerUtil.initconfig("controller.ftl");
+        FreemarkerUtil.generator(toControllerPath+Domain+"Controller.java",map);
 }
 }
