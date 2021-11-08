@@ -7,14 +7,16 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class ServerGenerator {
+    static String moudle="business";
     static String toServicePath = "server\\src\\main\\java\\com\\course\\server\\service\\";
-    static String toControllerPath = "business\\src\\main\\java\\com\\course\\business\\controller\\admin\\";
+    static String toControllerPath =moudle+ "\\src\\main\\java\\com\\course\\"+moudle+"\\controller\\admin\\";
     public static void main(String[] args) throws IOException, TemplateException {
         String Domain="Section";
         String domain="section";
         HashMap<Object, Object> map = new HashMap<>();
         map.put("Domain",Domain);
         map.put("domain",domain);
+        map.put("moudle",moudle);
 
         /*
         * 生成service

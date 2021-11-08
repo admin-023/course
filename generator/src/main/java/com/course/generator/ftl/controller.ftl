@@ -1,4 +1,4 @@
-package com.course.business.controller.admin;
+package com.course.${moudle}.controller.admin;
 
 import com.course.server.domain.${Domain};
 import com.course.server.dto.${Domain}Dto;
