@@ -20,44 +20,44 @@ import java.util.List;
 @Service
 public class SectionService {
 @Resource
-private SectionMapper chapterMapper;
+private SectionMapper sectionMapper;
                 public void list(PageDto pageDto) {
                 PageHelper.startPage(pageDto.getPage(),pageDto.getSize());
-                SectionExample chapterExample = new SectionExample();
-                List<Section> chapterList = chapterMapper.selectByExample(chapterExample);
-                PageInfo<Section> pageInfo=new PageInfo<>(chapterList);
+                SectionExample sectionExample = new SectionExample();
+                List<Section> sectionList = sectionMapper.selectByExample(sectionExample);
+                PageInfo<Section> pageInfo=new PageInfo<>(sectionList);
                 pageDto.setTotal(pageInfo.getTotal());
-                List<SectionDto> chapterDtoList = CopyUtil.copyList(chapterList, SectionDto.class);
-                pageDto.setList(chapterDtoList);
+                List<SectionDto> sectionDtoList = CopyUtil.copyList(sectionList, SectionDto.class);
+                pageDto.setList(sectionDtoList);
                 }
                 /*
                 * 保存，id有值时更新，无值时新增
                 */
-                public void save(SectionDto chapterDto) {
-                Section chapter = CopyUtil.copy(chapterDto, Section.class);
-                if (StringUtil.isEmpty(chapterDto.getId())){
-                this.insert(chapter);
+                public void save(SectionDto sectionDto) {
+                Section section = CopyUtil.copy(sectionDto, Section.class);
+                if (StringUtil.isEmpty(sectionDto.getId())){
+                this.insert(section);
                 }else{
-                this.update(chapter);
+                this.update(section);
                 }
                 }
                 /*
                 新增
                 **/
-                public void insert(Section chapter) {
-                chapter.setId(UuidUtil.getShortUuid());
-                chapterMapper.insert(chapter);
+                public void insert(Section section) {
+                section.setId(UuidUtil.getShortUuid());
+                sectionMapper.insert(section);
                 }
                 /*
                 更新
                 * */
-                public void update(Section chapter) {
-                chapterMapper.updateByPrimaryKey(chapter);
+                public void update(Section section) {
+                sectionMapper.updateByPrimaryKey(section);
                 }
                 /*
                 删除
                 */
                 public void delete(String id) {
-                chapterMapper.deleteByPrimaryKey(id);
+                sectionMapper.deleteByPrimaryKey(id);
                 }
                 }
