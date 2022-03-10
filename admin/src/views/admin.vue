@@ -412,6 +412,12 @@
                                 </router-link>
                             </li>
 
+                            <li class="active" id="business-section-sidebar">
+                                <router-link to="/business/section" >
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    小节管理
+                                </router-link>
+                            </li>
                             <b class="arrow"></b>
 
 

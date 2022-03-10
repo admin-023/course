@@ -33,7 +33,7 @@ public class DbUtil {
     public static String getTableComment(String tableName) throws Exception {
         Connection conn = getConnection();
         Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("select table_comment from informaiton_schema.tables where table_name='"+tableName+"'");
+        ResultSet rs = stmt.executeQuery("select table_comment from information_schema.tables where table_name = '" + tableName + "'");
         String tableNameCH = "";
         if (rs != null) {
             while(rs.next()) {

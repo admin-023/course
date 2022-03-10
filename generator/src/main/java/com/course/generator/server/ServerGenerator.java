@@ -10,10 +10,7 @@ import org.dom4j.io.SAXReader;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ServerGenerator {
     static String MODULE="business";
@@ -46,7 +43,7 @@ public class ServerGenerator {
 
         List<Field> fieldList = DbUtil.getColumnByTableName(tableName);
         Set<String> typeSet = getJavaType(fieldList);
-        HashMap<Object, Object> map = new HashMap<>();
+        Map<String,Object> map = new HashMap<>();
         map.put("Domain",Domain);
         map.put("domain",domain);
         map.put("module",module);
