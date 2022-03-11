@@ -77,6 +77,13 @@ public class DbUtil {
                 } else {
                     field.setNameCn(comment);
                 }
+                field.setNullAble("YES".equals(nullAble));
+                if (type.toUpperCase().contains("varchar".toUpperCase())) {
+                    String lengthStr = type.substring(type.indexOf("(") + 1, type.length() - 1);
+                    field.setLength(Integer.valueOf(lengthStr));
+                } else {
+                    field.setLength(0);
+                }
                 fieldList.add(field);
             }
         }

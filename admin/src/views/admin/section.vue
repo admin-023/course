@@ -184,6 +184,14 @@
             save(page){
                 let _this = this;
 
+                // 保存校验
+                if (1 != 1
+                    || !Validator.require(_this.section.title, "标题")
+                    || !Validator.length(_this.section.title, "标题", 1, 50)
+                    || !Validator.length(_this.section.video, "视频", 1, 200)
+                ) {
+                    return;
+                }
                 _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/admin/section/save',
                     _this.section).then((response) => {
                     console.log("保存小节列表结果：", response);
