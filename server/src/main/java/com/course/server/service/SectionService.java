@@ -17,6 +17,8 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
+        import java.util.Date;
+
 @Service
 public class SectionService {
 @Resource
@@ -25,6 +27,7 @@ private SectionMapper sectionMapper;
                 PageHelper.startPage(pageDto.getPage(),pageDto.getSize());
                 SectionExample sectionExample = new SectionExample();
                 List<Section> sectionList = sectionMapper.selectByExample(sectionExample);
+                        sectionExample.setOrderByClause("sort asc");
                 PageInfo<Section> pageInfo=new PageInfo<>(sectionList);
                 pageDto.setTotal(pageInfo.getTotal());
                 List<SectionDto> sectionDtoList = CopyUtil.copyList(sectionList, SectionDto.class);
@@ -45,6 +48,9 @@ private SectionMapper sectionMapper;
                 新增
                 **/
                 public void insert(Section section) {
+                        Date now = new Date();
+                        section.setCreatedAt(now);
+                        section.setUpdatedAt(now);
                 section.setId(UuidUtil.getShortUuid());
                 sectionMapper.insert(section);
                 }
@@ -52,6 +58,8 @@ private SectionMapper sectionMapper;
                 更新
                 * */
                 public void update(Section section) {
+                        Date now = new Date();
+                        section.setUpdatedAt(now);
                 sectionMapper.updateByPrimaryKey(section);
                 }
                 /*
