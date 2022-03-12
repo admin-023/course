@@ -2,22 +2,20 @@ package com.course.server.service;
 
 import com.course.server.domain.Section;
 import com.course.server.domain.SectionExample;
-import com.course.server.dto.SectionDto;
 import com.course.server.dto.PageDto;
+import com.course.server.dto.SectionDto;
+import com.course.server.enums.SectionChargeEnum;
 import com.course.server.mapper.SectionMapper;
 import com.course.server.util.CopyUtil;
 import com.course.server.util.UuidUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.util.StringUtil;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
-        import java.util.Date;
 
 @Service
 public class SectionService {
@@ -51,8 +49,9 @@ private SectionMapper sectionMapper;
                         Date now = new Date();
                         section.setCreatedAt(now);
                         section.setUpdatedAt(now);
-                section.setId(UuidUtil.getShortUuid());
-                sectionMapper.insert(section);
+                        section.setId(UuidUtil.getShortUuid());
+                        section.setCharge(SectionChargeEnum.CHARGE.getCode());
+                        sectionMapper.insert(section);
                 }
                 /*
                 更新
