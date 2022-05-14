@@ -36,7 +36,9 @@
         <!-- mapper类的位置 -->
         <javaClientGenerator targetProject="src\main\java"
                              targetPackage="com.course.server.mapper"
-                             type="XMLMAPPER" />
+                             type="XMLMAPPER" /><!--有三种生成方式：ANNOTATEDMAPPER（生成的SQL全在java中）；
+                                                    MIXEDMAPPER（生成的SQL部分在Java中，部分在xml中干）；
+                                                    XMLMAPPER（生成的SQL全在xml中）-->
 
 
 
