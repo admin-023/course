@@ -1,8 +1,7 @@
 package com.course.business.controller.admin;
 
-import com.course.server.domain.Chapter;
 import com.course.server.dto.ChapterDto;
-import com.course.server.dto.PageDto;
+import com.course.server.dto.ChapterPageDto;
 import com.course.server.dto.ResponseDto;
 import com.course.server.service.ChapterService;
 import com.course.server.util.ValidatorUtil;
@@ -11,8 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.websocket.server.PathParam;
-import java.util.List;
 
 @RestController
 @RequestMapping("/admin/chapter")
@@ -22,12 +19,13 @@ public class ChapterController {
     private ChapterService chapterService;
 
     @RequestMapping("/list")
-    public ResponseDto list(@RequestBody PageDto pageDto){
-        LOG.info("pageDto:{}",pageDto);
+    public ResponseDto list(@RequestBody ChapterPageDto chapterPageDto){
+        LOG.info("chapterPageDto:{}",chapterPageDto);
         ResponseDto responseDto = new ResponseDto();
-        chapterService.list(pageDto);
-        LOG.info("pageDto:{}",pageDto);
-        responseDto.setContent(pageDto);
+        ValidatorUtil.require(chapterPageDto.getCourseId(),"课程ID");
+        chapterService.list(chapterPageDto);
+        LOG.info("chapterPageDto:{}",chapterPageDto);
+        responseDto.setContent(chapterPageDto);
         LOG.info("responseDto:{}",responseDto);
         return responseDto;
     }
