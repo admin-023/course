@@ -11,6 +11,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.util.StringUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -23,7 +24,7 @@ public class ChapterService {
         PageHelper.startPage(chapterPageDto.getPage(),chapterPageDto.getSize());//它会自动找到它下面第一条SQL语句并执行它自己给sql语句加上limit
         ChapterExample chapterExample = new ChapterExample();
         ChapterExample.Criteria criteria=chapterExample.createCriteria();
-        if (!StringUtil.isEmpty(chapterPageDto.getCourseId())){
+        if (!StringUtils.isEmpty(chapterPageDto.getCourseId())){
             criteria.andCourseIdEqualTo(chapterPageDto.getCourseId());
         }
         List<Chapter> chapterList = chapterMapper.selectByExample(chapterExample);
