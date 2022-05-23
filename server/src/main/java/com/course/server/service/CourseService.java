@@ -5,24 +5,25 @@ import com.course.server.domain.CourseExample;
 import com.course.server.dto.CourseDto;
 import com.course.server.dto.PageDto;
 import com.course.server.mapper.CourseMapper;
+import com.course.server.mapper.my.MyCourseMapper;
 import com.course.server.util.CopyUtil;
 import com.course.server.util.UuidUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.util.StringUtil;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
-        import java.util.Date;
 
 @Service
 public class CourseService {
-@Resource
-private CourseMapper courseMapper;
+                @Resource
+                private CourseMapper courseMapper;
+                @Resource
+                private MyCourseMapper myCourseMapper;
+
                 public void list(PageDto pageDto) {
                 PageHelper.startPage(pageDto.getPage(),pageDto.getSize());
                 CourseExample courseExample = new CourseExample();
@@ -67,5 +68,11 @@ private CourseMapper courseMapper;
                 */
                 public void delete(String id) {
                 courseMapper.deleteByPrimaryKey(id);
+                }
+                /*
+                * 更新课程时长
+                * */
+                public void updateTime(String courseId){
+                    myCourseMapper.updateTime(courseId);
                 }
                 }

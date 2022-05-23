@@ -22,6 +22,8 @@ import java.util.List;
 public class SectionService {
 @Resource
 private SectionMapper sectionMapper;
+@Resource
+private CourseService courseService;
                 public void list(SectionPageDto sectionPageDto) {
                 PageHelper.startPage(sectionPageDto.getPage(),sectionPageDto.getSize());
                 SectionExample sectionExample = new SectionExample();
@@ -49,6 +51,7 @@ private SectionMapper sectionMapper;
                 }else{
                 this.update(section);
                 }
+                courseService.updateTime(section.getCourseId());
                 }
                 /*
                 新增
