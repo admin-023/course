@@ -12,6 +12,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.util.StringUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
@@ -44,6 +45,7 @@ private CourseService courseService;
                 /*
                 * 保存，id有值时更新，无值时新增
                 */
+                @Transactional //配置事务
                 public void save(SectionDto sectionDto) {
                 Section section = CopyUtil.copy(sectionDto, Section.class);
                 if (StringUtil.isEmpty(sectionDto.getId())){
