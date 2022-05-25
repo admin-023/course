@@ -141,7 +141,7 @@
                     _this.$refs.pagination.render(page,resp.content.total);
                 })
             },
-            save(page){
+            save(){
                 let _this = this;
 
                 // 保存校验

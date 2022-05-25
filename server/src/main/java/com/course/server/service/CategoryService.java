@@ -10,11 +10,9 @@ import com.course.server.util.UuidUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.util.StringUtil;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,7 +20,16 @@ import java.util.List;
 public class CategoryService {
 @Resource
 private CategoryMapper categoryMapper;
-                public void list(PageDto pageDto) {
+
+    public List<CategoryDto> all() {
+        CategoryExample categoryExample = new CategoryExample();
+        List<Category> categoryList = categoryMapper.selectByExample(categoryExample);
+        categoryExample.setOrderByClause("sort asc");
+        List<CategoryDto> categoryDtoList = CopyUtil.copyList(categoryList, CategoryDto.class);
+        return categoryDtoList;
+    }
+
+public void list(PageDto pageDto) {
                 PageHelper.startPage(pageDto.getPage(),pageDto.getSize());
                 CategoryExample categoryExample = new CategoryExample();
                 List<Category> categoryList = categoryMapper.selectByExample(categoryExample);
