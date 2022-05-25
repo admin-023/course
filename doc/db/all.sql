@@ -55,4 +55,60 @@ create table `section` (
 )engine=innodb default charset =utf8mb4 comment ='小节';
 
 insert into `section`(id,title,course_id,chapter_id,video,time,charge,sort,created_at,updated_at)
-                                                                            values ('00000001','测试小节01','00000001','00000000','',500,'f',1,now(),now());
+values ('00000001','测试小节01','00000001','00000000','',500,'f',1,now(),now());
+
+# 分类
+drop table if exists `category`;
+create table `category`(
+`id` char(8) not null default ' ' comment 'id',
+`parent`  char(8) not null default ' ' comment '父id',
+`name` varchar(50) not null comment '名称',
+`sort` int comment '顺序',
+primary key (`id`)
+)engine=innodb default charset=utf8mb4 comment='分类';
+
+Insert into `category` (id, parent, name, sort) values('00000100','00000000','前端技术',100);
+Insert into `category` (id, parent, name, sort) values('00000101','00000100','html/css',101);
+Insert into `category` (id, parent, name, sort) values('00000102','00000100','javascript',102);
+Insert into `category` (id, parent, name, sort) values('00000103','00000100','vue.js',103);
+Insert into `category` (id, parent, name, sort) values('00000104','00000100','react.js',104);
+Insert into `category` (id, parent, name, sort) values('00000105','00000100','angular',105);
+Insert into `category` (id, parent, name, sort) values('00000106','00000100','node.js',106);
+Insert into `category` (id, parent, name, sort) values('00000107','00000100','jquery',107);
+Insert into `category` (id, parent, name, sort) values('00000108','00000100','小程序',108);
+Insert into `category` (id, parent, name, sort) values('00000200','00000000','后端技术',200);
+Insert into `category` (id, parent, name, sort) values('00000201','00000200','springboot',201);
+Insert into `category` (id, parent, name, sort) values('00000202','00000200','springcloud',202);
+Insert into `category` (id, parent, name, sort) values('00000203','00000200','ssm',203);
+Insert into `category` (id, parent, name, sort) values('00000204','00000200','python',204);
+Insert into `category` (id, parent, name, sort) values('00000205','00000200','爬虫',205);
+Insert into `category` (id, parent, name, sort) values('00000206','00000200','java',206);
+Insert into `category` (id, parent, name, sort) values('00000300','00000000','移动开发',300);
+Insert into `category` (id, parent, name, sort) values('00000301','00000300','android',301);
+Insert into `category` (id, parent, name, sort) values('00000302','00000300','ios',302);
+Insert into `category` (id, parent, name, sort) values('00000303','00000300','react native',303);
+Insert into `category` (id, parent, name, sort) values('00000304','00000300','ionic',304);
+Insert into `category` (id, parent, name, sort) values('00000400','00000000','前沿技术',400);
+Insert into `category` (id, parent, name, sort) values('00000401','00000400','微服务',401);
+Insert into `category` (id, parent, name, sort) values('00000402','00000400','区块链',402);
+Insert into `category` (id, parent, name, sort) values('00000403','00000400','机器学习',403);
+Insert into `category` (id, parent, name, sort) values('00000404','00000400','深度学习',404);
+Insert into `category` (id, parent, name, sort) values('00000405','00000400','数据分析&挖掘',405);
+Insert into `category` (id, parent, name, sort) values('00000500','00000000','云计算&大数据',500);
+Insert into `category` (id, parent, name, sort) values('00000501','00000500','大数据',501);
+Insert into `category` (id, parent, name, sort) values('00000502','00000500','Hadoop',502);
+Insert into `category` (id, parent, name, sort) values('00000503','00000500','spark',503);
+Insert into `category` (id, parent, name, sort) values('00000504','00000500','hbase',504);
+Insert into `category` (id, parent, name, sort) values('00000505','00000500','阿里云',505);
+Insert into `category` (id, parent, name, sort) values('00000506','00000500','docker',506);
+Insert into `category` (id, parent, name, sort) values('00000507','00000500','kubernetes',507);
+Insert into `category` (id, parent, name, sort) values('00000600','00000000','运维&测试',600);
+Insert into `category` (id, parent, name, sort) values('00000601','00000600','测试',601);
+Insert into `category` (id, parent, name, sort) values('00000602','00000600','运维',602);
+Insert into `category` (id, parent, name, sort) values('00000603','00000600','Linux',603);
+Insert into `category` (id, parent, name, sort) values('00000604','00000600','功能测试',604);
+Insert into `category` (id, parent, name, sort) values('00000605','00000600','性能测试',605);
+Insert into `category` (id, parent, name, sort) values('00000700','00000000','数据库',700);
+Insert into `category` (id, parent, name, sort) values('00000701','00000700','MySQL',701);
+Insert into `category` (id, parent, name, sort) values('00000702','00000700','Redis',702);
+Insert into `category` (id, parent, name, sort) values('00000703','00000700','MongoDB',703);
