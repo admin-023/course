@@ -197,6 +197,12 @@
                             }
                         }
                     }
+                    _this.level2 = [];
+                    // 对当前一级分类中选中的表格触发一次点击事件，以刷新二级菜单列表
+                    // 注意：界面的渲染需要等vue绑定好变量后才做，所以加延时100ms
+                    setTimeout(function () {
+                        $("tr.active").trigger("click");
+                    }, 100);
                 })
             },
             save(){
