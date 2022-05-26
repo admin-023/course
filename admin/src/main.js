@@ -30,3 +30,6 @@ new Vue({
 }).$mount('#app');
 
 console.log("环境：",process.env.NODE_ENV);
+
+import swal from 'sweetalert2';
+window.Swal = swal;
