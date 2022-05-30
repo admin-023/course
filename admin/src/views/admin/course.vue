@@ -169,6 +169,7 @@
                 COURSE_LEVEL:COURSE_LEVEL,
                 COURSE_STATUS:COURSE_STATUS,
                 categorys: [],
+                tree:{},
             }
         },
         mounted: function () {
@@ -218,6 +219,14 @@
                 ) {
                     return;
                 }
+
+                let categorys = _this.tree.getCheckedNodes();
+                if (Tool.isEmpty(categorys)){
+                    Toast.warning("请选择你的分类");
+                    return;
+                }
+                console.log(categorys);
+                _this.course.categorys=categorys;
                 _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/admin/course/save',
                     _this.course).then((response) => {
                     console.log("保存课程列表结果：", response);
@@ -273,7 +282,6 @@
                 let zNodes = _this.categorys;
 
                 _this.tree = $.fn.zTree.init($("#tree"), setting, zNodes);
-
                 // 展开所有的节点
                _this.tree.expandAll(true);
             },
