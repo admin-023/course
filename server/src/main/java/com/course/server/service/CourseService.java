@@ -12,6 +12,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.util.StringUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -39,6 +40,7 @@ public class CourseService {
                 /*
                 * 保存，id有值时更新，无值时新增
                 */
+                @Transactional
                 public void save(CourseDto courseDto) {
                 Course course = CopyUtil.copy(courseDto, Course.class);
                 if (StringUtil.isEmpty(courseDto.getId())){
