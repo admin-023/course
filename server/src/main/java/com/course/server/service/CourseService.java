@@ -1,9 +1,12 @@
 package com.course.server.service;
 
 import com.course.server.domain.Course;
+import com.course.server.domain.CourseContent;
 import com.course.server.domain.CourseExample;
+import com.course.server.dto.CourseContentDto;
 import com.course.server.dto.CourseDto;
 import com.course.server.dto.PageDto;
+import com.course.server.mapper.CourseContentMapper;
 import com.course.server.mapper.CourseMapper;
 import com.course.server.mapper.my.MyCourseMapper;
 import com.course.server.util.CopyUtil;
@@ -26,6 +29,8 @@ public class CourseService {
                 private MyCourseMapper myCourseMapper;
                 @Resource
                 private CourseCategoryService courseCategoryService;
+                @Resource
+                private CourseContentMapper courseContentMapper;
 
                 public void list(PageDto pageDto) {
                 PageHelper.startPage(pageDto.getPage(),pageDto.getSize());
@@ -80,5 +85,25 @@ public class CourseService {
                 * */
                 public void updateTime(String courseId){
                     myCourseMapper.updateTime(courseId);
+                }
+                /*
+                * 查找课程内容*/
+                public CourseContentDto findContent(String id){
+                    CourseContent courseContent = courseContentMapper.selectByPrimaryKey(id);
+                    if (courseContent==null){
+                        return null;
+                    }
+                    CourseContentDto courseContentDto=CopyUtil.copy(courseContent,CourseContentDto.class);
+                    return courseContentDto;
+                }
+                /*
+                * 保存课程内容,包含新增和修改*/
+                public int saveContent(CourseContentDto courseContentDto){
+                    CourseContent courseContent=CopyUtil.copy(courseContentDto,CourseContent.class);
+                    int i=courseContentMapper.updateByPrimaryKeyWithBLOBs(courseContent);//返回修改的行数
+                    if (i==0){//如果修改的行数为零，那么就是新增
+                        i=courseContentMapper.insert(courseContent);
+                    }
+                    return i;
                 }
                 }

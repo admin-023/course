@@ -1,9 +1,6 @@
 package com.course.business.controller.admin;
 
-import com.course.server.dto.CourseCategoryDto;
-import com.course.server.dto.CourseDto;
-import com.course.server.dto.PageDto;
-import com.course.server.dto.ResponseDto;
+import com.course.server.dto.*;
 import com.course.server.service.CourseCategoryService;
 import com.course.server.service.CourseService;
 import com.course.server.util.ValidatorUtil;
@@ -69,5 +66,23 @@ public class CourseController {
         List<CourseCategoryDto> dtoList = courseCategoryService.listByCourse(courseId);
         responseDto.setContent(dtoList);
         return responseDto;
+    }
+    /*
+    * 查找课程的内容*/
+    @GetMapping("/find-content/{id}")
+    public ResponseDto findContent(@PathVariable(value = "id") String id){
+        ResponseDto responseDto=new ResponseDto();
+        CourseContentDto courseContentDto=courseService.findContent(id);
+        responseDto.setContent(courseContentDto);
+        return  responseDto;
+    }
+    /*
+    * 保存课程的内容
+    * */
+    @PostMapping("/save-content")
+    public ResponseDto saveContent(@RequestBody CourseContentDto courseContentDto){
+        ResponseDto responseDto=new ResponseDto();
+        courseService.saveContent(courseContentDto);
+        return  responseDto;
     }
 }

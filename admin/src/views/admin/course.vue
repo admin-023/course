@@ -48,12 +48,15 @@
                             <button v-on:click="toChapter(course)" class="btn btn-white btn-xs btn-info btn-round">
                                 大章
                             </button>&nbsp;
+                            <button v-on:click="editContent(course)" class="btn btn-white btn-xs btn-info btn-round">
+                                内容
+                            </button>&nbsp;
                             <button v-on:click="edit(course)" class="btn btn-white btn-xs btn-info btn-round">
                                 编辑
                             </button>&nbsp;
                             <button v-on:click="del(course.id)" class="btn btn-white btn-xs btn-info btn-round">
                                 删除
-                            </button>
+                            </button>&nbsp;
                         </p>
                     </div>
                 </div>
@@ -153,6 +156,35 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+        <div id="course-content-modal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                        <h4 class="modal-title">内容编辑</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <div id="content"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <button type="button" class="btn btn-white btn-default btn-round" data-dismiss="modal">
+                        <i class="ace-icon fa fa-times"></i>
+                        取消
+                    </button>&nbsp;
+                    <button type="button" class="btn btn-white btn-info btn-round" v-on:click="saveContent()">
+                        <i class="ace-icon fa fa-plus blue"></i>
+                        保存
+                    </button>&nbsp;
+                </div>
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -305,6 +337,48 @@
                         _this.tree.checkNode(node, true);
                     }
                 })
+            },
+            editContent(course) {
+                let _this = this;
+                let id = course.id;
+                _this.course =course;
+                $("#content").summernote({
+                    focus: true,
+                    height: 300
+                });
+                // 先清空历史文本
+                $("#content").summernote('code', '');
+                _this.$ajax.get(process.env.VUE_APP_SERVER + '/business/admin/course/find-content/' + id).then((response)=>{
+                    let resp = response.data;
+
+                    if (resp.success) {
+                        $("#course-content-modal").modal({backdrop:'static',keyboard:false});
+                        if (resp.content) {
+                            $("#content").summernote('code', resp.content.content);
+                        }
+                    } else {
+                        Toast.warning(resp.message);
+                    }
+                });
+            },
+
+            /**
+             * 保存内容
+             */
+            saveContent () {
+                let _this = this;
+                let content = $("#content").summernote("code");
+                _this.$ajax.post(process.env.VUE_APP_SERVER + '/business/admin/course/save-content', {
+                    id: _this.course.id,
+                    content: content
+                }).then((response)=>{
+                    let resp = response.data;
+                    if (resp.success) {
+                        Toast.success("内容保存成功");
+                    } else {
+                        Toast.warning(resp.message);
+                    }
+                });
             },
             /**
              * 点击【大章】
