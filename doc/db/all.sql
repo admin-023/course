@@ -129,3 +129,4 @@ create table `course_content`(
 `content` mediumtext not null  comment '课程内容',
 primary key (id)
 )engine=innodb default charset=utf8mb4 comment='课程内容';
+
