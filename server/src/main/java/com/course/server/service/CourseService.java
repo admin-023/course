@@ -110,6 +110,7 @@ public class CourseService {
                 /*
                 * 更新排序
                 * */
+                @Transactional
                 public void sort(SortDto sortDto){
                     /*更新新的排序*/
                     myCourseMapper.updateSort(sortDto);
