@@ -1,9 +1,8 @@
 package com.course.business.controller.admin;
 
-import com.course.server.domain.Teacher;
-import com.course.server.dto.TeacherDto;
 import com.course.server.dto.PageDto;
 import com.course.server.dto.ResponseDto;
+import com.course.server.dto.TeacherDto;
 import com.course.server.service.TeacherService;
 import com.course.server.util.ValidatorUtil;
 import org.slf4j.Logger;
@@ -11,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -55,6 +53,14 @@ public class TeacherController {
         LOG.info("id:{}",id);
         ResponseDto responseDto = new ResponseDto();
         teacherService.delete(id);
+        return responseDto;
+    }
+
+    @RequestMapping("/all")
+    public ResponseDto all(){
+        ResponseDto responseDto = new ResponseDto();
+        List<TeacherDto> teacherDtoList= teacherService.all();
+        responseDto.setContent(teacherDtoList);
         return responseDto;
     }
 }
