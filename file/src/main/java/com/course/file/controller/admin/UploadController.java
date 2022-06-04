@@ -38,6 +38,7 @@ public class UploadController {
         file.transferTo(desk);
         LOG.info(desk.getAbsolutePath());
         ResponseDto responseDto=new ResponseDto();
+        responseDto.setContent("http://127.0.0.1:9000/file/f/teacher/"+key+"-"+filename);
         return responseDto;
   }
 }
