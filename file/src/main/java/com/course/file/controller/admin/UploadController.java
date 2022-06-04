@@ -5,6 +5,7 @@ import com.course.server.dto.ResponseDto;
 import com.course.server.util.UuidUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,13 @@ import java.io.IOException;
 @RestController /*@RestController返回json数据 @Controller返回页面*/
 @RequestMapping("/admin")
 public class UploadController {
+
+    //@Value,注入属性值
+    @Value("${file.domain}")
+    private String FILE_DOMAIN;
+
+    @Value("${file.path}")
+    private String FILE_PATH;
 
     private static final Logger LOG= LoggerFactory.getLogger(FileApplication.class);
 
@@ -30,7 +38,7 @@ public class UploadController {
         //文件保存到本地
         String filename=file.getOriginalFilename();
         String key= UuidUtil.getShortUuid();
-        String fullpath="D:/file/course/teacher/"+key+"-"+filename;
+        String fullpath=FILE_PATH+key+"-"+filename;
         File desk=new File(fullpath);
         if (!desk.exists()){//如果desk路径不存在，创建新文件夹
             desk.mkdirs();
@@ -38,7 +46,7 @@ public class UploadController {
         file.transferTo(desk);
         LOG.info(desk.getAbsolutePath());
         ResponseDto responseDto=new ResponseDto();
-        responseDto.setContent("http://127.0.0.1:9000/file/f/teacher/"+key+"-"+filename);
+        responseDto.setContent(FILE_DOMAIN+key+"-"+filename);
         return responseDto;
   }
 }
