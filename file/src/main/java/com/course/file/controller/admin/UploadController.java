@@ -27,14 +27,16 @@ public class UploadController {
         LOG.info(file.getOriginalFilename());
         LOG.info(String.valueOf(file.getSize()));
 
+        //文件保存到本地
         String filename=file.getOriginalFilename();
         String key= UuidUtil.getShortUuid();
-        String fullpath="D:/file/teacher/"+key+"-"+filename;
+        String fullpath="D:/file/course/teacher/"+key+"-"+filename;
         File desk=new File(fullpath);
         if (!desk.exists()){//如果desk路径不存在，创建新文件夹
             desk.mkdirs();
         }
         file.transferTo(desk);
+        LOG.info(desk.getAbsolutePath());
         ResponseDto responseDto=new ResponseDto();
         return responseDto;
   }
