@@ -145,4 +145,17 @@ create table `teacher`(
 primary key (id)
 )engine=innodb default charset=utf8mb4 comment='讲师';
 
-
+# 文件
+drop table if exists `file`;
+create table `file`(
+`id` char(8) not null default '' comment '文件id',
+`path` varchar(100) not null comment '相对路径',
+`name` varchar(100)  comment '文件名',
+`suffix` varchar(10) comment '后缀',
+`size` int comment '大小|字节B',
+`use` char(1) comment '用途|枚举[FileUseEnum]:COURSE("C","讲师"),TEACHER("T","课程")',
+`created_at` datetime comment '创建时间',
+`updated_at` datetime comment '修改时间',
+ primary key(`id`),
+ unique key `path_unique` (`path`)
+)engine=innodb default charset=utf8mb4 comment='文件';
