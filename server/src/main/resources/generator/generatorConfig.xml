@@ -6,6 +6,7 @@
 <generatorConfiguration>
     <context id="Mysql" targetRuntime="MyBatis3" defaultModelType="flat">
 
+        <property name="autoDelimitKeywords" value="true"/>
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
 
